@@ -1,0 +1,95 @@
+{% extends 'pedido/pedidoBase.html' %}
+{% set erros=erros or None %}
+{% block js %}
+    <script type="text/javascript" src="/static/angular/js/angular.min.js"></script>
+    <script type="text/javascript" src="/static/pedido/pedido.js"></script>
+ {# <script type="text/javascript" src="/static/pedido/js/pedido_api_mock.js"></script> #}
+    <script type="text/javascript">
+
+   var resti = angular.module('resti',[]);
+     resti.factory('PedidoApi',function($http){
+        return{
+            salvar: function(pedido) {
+                return $http.post('/resti/pedidos/salvar', pedido); {# {{ resti_new_path }} #}
+            },
+            listar:function(){
+                return $http.post('/resti/pedidos/listar');
+            },
+            deletar:function(id){
+                return $http.post('/resti/pedidos/apagar',{pedido_id:id});
+            }
+       };
+    });
+
+  {# var rest= angular.module('rest',[]);
+        rest.factory('CategoriaApi', function($rootScope){
+            return {
+                salvar: function(categoria){
+                    var obj={};
+                    obj.success= function(fcnSucesso){
+                        obj.fcnSucesso=fcnSucesso;
+                    };
+                    obj.error= function(fcnErro){
+                        obj.fcnErro=fcnErro;
+                    };
+                    setTimeout(function(){
+                        categoria.id=1;
+                        obj.fcnSucesso(categoria);
+                        $rootScope.$digest()
+                    },1000);
+                    return obj;
+                    return $http.post('/rest/categorias/salvar', categoria);
+                }
+            };
+        });#}
+
+
+   var pedidoApp = angular.module('pedidoApp',['pedidoModulo', 'resti']);
+
+   function pedidoController($scope, PedidoApi){
+        $scope.pedido = {email:'example@example.com', descricao:' Deixe seu comentário ', arquivo:'example.jpg'};
+        $scope.mostrarFormFlag=false;
+        $scope.pedidoLista=[];
+        $scope.listandoFlag=true;
+        PedidoApi.listar().success(function(pedido){
+            $scope.pedidoLista=pedido;
+            $scope.listandoFlag=false;
+       });
+
+       $scope.mostrarOuEsconderForm=function(){
+            $scope.mostrarFormFlag=!$scope.mostrarFormFlag;
+       };
+       $scope.adicionarPedido=function(pedido){
+           $scope.pedidoLista.unshift(pedido);
+       };
+       $scope.removerPedido=function(pedido){
+           var pedidoLista = $scope.pedidoLista;
+           for(var i=0 ; i < pedidoLista.length; i+=1){
+               if(pedido.id == pedidoLista[i].id){
+                   pedidoLista.splice(i,1);
+                   break;
+               }
+           }
+       }
+    }
+    </script>
+{% endblock %}
+{% block body %}
+  <div class="container" xmlns="http://www.w3.org/1999/html">
+      <div class="row clearfix">
+          <div class="col-md-12" ng-app="pedidoApp" ng-controller="pedidoController">
+              <h1 class="text">Formulário de Pedidos</h1>
+              <button class ="btn btn-success" ng-click="mostrarOuEsconderForm()">Novo Pedido</button>
+              <br/>
+              <br/>
+              <pedidoform ng-show="mostrarFormFlag" ped="pedido" email-label="email" descricao-label="descricao" arquivo-label="arquivo" save-complete="adicionarPedido(pedido)"></pedidoform><br/>
+
+              <h1 class="text">Pedidos</h1><br/>
+              <table pedidolinha ng-repeat="p in pedidoLista" ped="p" delete-complete="removerPedido(pedido)"></table>
+              <img src="/static/img/ajax.gif" ng-show="listandoFlag"/>
+
+          </div>
+      </div>
+  </div>
+{% endblock %}
+

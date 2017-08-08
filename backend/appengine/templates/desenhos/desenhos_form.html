@@ -1,0 +1,37 @@
+{% extends 'desenhos/desenhos_base.html' %}
+{% block body %}
+{% set desenho = desenho or None %}
+    {% set erros = erros or None %}
+
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-6 col-md-offset-3">
+        <div class="well">
+            <p align="center">
+				Em caso de dúvidas, mais informações ou fazer seu pedido entre em contato conosco que retornaremos em breve.
+			</p>
+            <br>
+
+        <h3 align="center">Formulário de Desenhos</h3>
+
+             <form action="{{ salvar_path }}" method="post">
+
+                 {{ csrf_input() }}
+                 {{ form_input('Email','email',desenho.email,erros.email) }}
+                 {{ form_input('Descricao','descricao',desenho.descricao,erros.descricao) }}
+                 {{ form_input('Arquivo','arquivo',desenho.arquivo,erros.arquivo) }}
+             
+                 {% if desenhos and desenho.key %}
+                <input type="hidden" name="desenho_id" value="{{ desenho.key.id() }}"/>
+
+             {% endif %}
+             <button class="btn btn-success" type="submit">Salvar</button>
+
+             </form>
+
+
+		</div>
+	</div>
+</div>
+</div>
+{% endblock %}

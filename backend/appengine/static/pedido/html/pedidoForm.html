@@ -1,0 +1,25 @@
+<form style="width: auto">
+
+    <div id="email-div" class="form-group" ng-class="{true:'', false'has-error'}[errors.email==null]">
+        <label for="emailInput" class="control-label">{{ emailLabel }}</label>
+        <input id="emailInput" type="text" class="form-control" ng-model="ped.email">
+        <span class="help-block" ng-show="errors.email">{{ errors.email }}</span>
+    </div>
+
+    <div id="descricao-div" class="form-group" ng-class="{true:'', false'has-error'}[errors.descricao==null]">
+        <label for="descricaoInput" class="control-label">{{ descricaoLabel }}</label>
+        <input id="descricaoInput" type="text" class="form-control" ng-model="ped.descricao">
+        <span class="help-block" ng-show="errors.descricao">{{ errors.descricao }}</span>
+    </div>
+
+    <div id="arquivo-div" class="form-group" ng-class="{true:'', false'has-error'}[errors.arquivo==null]">
+        <label for="arquivoInput" class="control-label">{{ arquivoLabel }}</label>
+        <input id="arquivoInput" type="text" class="form-control" ng-model="ped.arquivo">
+        <span class="help-block" ng-show="errors.arquivo">{{ errors.arquivo }}</span>
+    </div>
+
+    <button type="reset" class="btn btn-warning">Limpar</button>
+    <button id="salvar-pedido-btn" class="btn btn-success" ng-click="salvar()" ng-hide="salvandoFlag">Salvar</button>
+    <img id="ajax-img" src="/static/img/ajax.gif" ng-show="salvandoFlag"/>
+
+</form>

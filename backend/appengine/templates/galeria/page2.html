@@ -1,0 +1,88 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+
+      <style>
+
+    img {
+  filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+    -webkit-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    margin-bottom:20px;
+}
+
+img:hover {
+  filter: none; /* IE6-9 */
+  -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
+
+
+    </style>
+
+<div class="container">
+    <div class="row">
+
+        <p align="center">
+				Aqui estão alguns dos nossos desenhos, por Flavia e Fabiana Oliveira.
+        </p>
+        <br>
+
+		<div class="col-md-3 col-sm-4 col-xs-6">
+            <a href="/static/img/18.jpg">
+                <img class="img-responsive" style="width:300px;height:210px" src="/static/img/18.jpg" /></a>
+        </div>
+
+        <div class="col-md-3 col-sm-4 col-xs-6">
+            <a href="/static/img/19.jpg">
+                <img class="img-responsive" style="width:300px;height:210px" src="/static/img/19.jpg" /></a>
+        </div>
+
+        <div class="col-md-3 col-sm-4 col-xs-6">
+            <a href="/static/img/20.jpg">
+                <img class="img-responsive" style="width:300px;height:210px" src="/static/img/20.jpg" /></a>
+        </div>
+
+        <div class="col-md-3 col-sm-4 col-xs-6">
+            <a href="/static/img/21.jpg">
+            <img class="img-responsive" style="width:300px;height:210px" src="/static/img/21.jpg" /></a>
+        </div>
+
+        <div class="col-md-3 col-sm-4 col-xs-6">
+            <a href="/static/img/22.jpg">
+            <img class="img-responsive" style="width:300px;height:210px" src="/static/img/22.jpg" /></a>
+        </div>
+
+        <div class="col-md-3 col-sm-4 col-xs-6">
+            <a href="/static/img/23.jpg">
+            <img class="img-responsive" style="width:300px;height:210px" src="/static/img/23.jpg" /></a>
+        </div>
+
+	    <div class="col-md-3 col-sm-4 col-xs-6">
+            <a href="/static/img/24.jpg">
+            <img class="img-responsive" style="width:300px;height:210px" src="/static/img/24.jpg" /></a>
+        </div>
+
+        <div class="col-md-3 col-sm-4 col-xs-6">
+            <a href="/static/img/25.jpg">
+            <img class="img-responsive" style="width:300px;height:210px" src="/static/img/25.jpg" /></a>
+        </div>
+
+
+    </div>
+
+    </div>
+    <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div style="text-align: center;"><ul class="pagination">
+                    <li>
+                        <a href="/galeria/home">Prev</a>
+                    </li>
+                    <li>
+                        <a href="/galeria/page1">1</a>
+                    </li>
+
+                </ul></div>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'pedidos/pedido_base.html' %}
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="well">
+
+            <p align="center">
+				Em caso de dúvidas, mais informações ou fazer seu pedido entre em contato conosco que retornaremos em breve.
+			</p>
+            <br>
+          <h3>Formulário de Pedidos</h3>
+
+        <form action="{{ salvar_path }}" method="post">
+            {{ csrf_input() }}
+            {{ form_input('Email','email','','') }}
+            {{ form_input('Descricao','descricao','','') }}
+            {{ form_input('Arquivo','arquivo','','') }}
+            <button class="btn btn-success" type="submit">Salvar</button>
+        </form>
+
+            <ul>
+                {% for ped in pedidos %}
+                <li>{{ ped.email }}-{{ ped.descricao}}-{{ ped.arquivo }}
+
+                <a class="btn btn-primary" href="{{ ped.edit_path }}">
+                <i class="glyphicon glyphicon-pencil"></i>
+                </a>
+
+                <form action="{{ ped.deletar_path }}" method="post">
+                    {{ csrf_input() }}
+                    <button class="btn bg-danger"><i class="glyphicon glyphicon-trash"></i> </button>
+
+                </form>
+
+                </li>
+                {% endfor %}
+            </ul>
+
+         </div>
+        </div>
+
+      </div>
+</div>
+{% endblock %}

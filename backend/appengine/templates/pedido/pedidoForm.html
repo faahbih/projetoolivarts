@@ -1,0 +1,39 @@
+{% extends 'pedido/pedidoBase.html' %}
+{% block body %}
+{% set pedido = pedido or None %}
+{% set erros = erros or None %}
+
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+
+        <div class="row clearfix">
+
+            <div class="col-md-12 column">
+
+                <h1 class="text-center">Formulário de Pedidos</h1>
+
+                <br/>
+
+
+                <form action="{{ salvar_path }}" method="post">
+
+
+                    {{ csrf_input() }}
+
+                    {{ form_input('Email','email',pedido.email,erros.email) }}
+                    {{ form_input('Descricao','descricao',pedido.descricao,erros.descricao) }}
+                    {{ form_input('Arquivo','arquivo',pedido.arquivo,erros.arquivo) }}
+
+
+                    {% if pedido and pedido.key %}
+                        <input type="hidden" name="pedido_id" value="{{ pedido.key.id() }}"/>
+                    {% endif %}
+
+
+                    <button class="btn btn-warning" type="submit">Salvar</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

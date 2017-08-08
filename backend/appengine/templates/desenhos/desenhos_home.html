@@ -1,0 +1,47 @@
+{% extends 'desenhos/desenhos_base.html' %}
+{% block js %}
+  <script type="application/javascript" src="/static/js/desenhos.js">
+  </script>
+{% endblock %}
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="well">
+          <h3>Formulário de Pedidos</h3>
+
+            {{ csrf_input() }}
+            Pedido:
+            {% macro select(email) %}
+              <select email="{{ email }}" class="form-control input-sm">
+
+                  {% for des in desenhos %}
+                  <option value="{{ des.key.id() }}" {{ 'selected="selected"' | safe if desenho_selecionada == ped }}> {{ des.email }}</option>
+                  {% endfor %}
+
+              </select>
+            {% endmacro %}
+
+            {{ select('pedido') }}
+            {{ form_input('Email','email','','')}}
+            {{ form_input('Descricao','descricao','','') }}
+            {{ form_input('Arquivo','arquivo','','') }}
+            <button id="salvar-pedido-btn" class="btn btn-success" >Salvar</button>
+
+            <img id="ajax-img" src="/static/img/ajax.gif" />
+
+            <div id="lista-div">
+                <h3>Lista de Pedidos {{ 'cadastrados '+ desenho_selecionada.email if desenho_selecionada }}</h3>
+
+                <form action="{{ pesquisar_path }}">
+                    {{ select('desenho_selecionada') }}
+                    <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+
+                </form>
+                <ul id="pedidos-lista"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
